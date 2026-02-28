@@ -21,3 +21,7 @@ Optional environment overrides:
 ## GitHub Actions secret
 
 Set repository secret `UNLUAC_MIRROR_TOKEN` to a fine-grained GitHub token with `Contents: Read and write` for `notpeter/unluac`.
+
+The workflow writes this token to `~/.netrc` and pushes to `git+https://github.com/notpeter/unluac.git`.
+
+Note: for `pull_request` runs from forks, repository secrets are unavailable by design.
