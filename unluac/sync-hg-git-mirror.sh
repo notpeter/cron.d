@@ -7,7 +7,7 @@ GIT_MIRROR_URL="${GIT_MIRROR_URL:-git+ssh://git@github.com/notpeter/unluac.git}"
 GIT_BRANCH="${GIT_BRANCH:-main}"
 REPO_DIR="${1:-${REPO_DIR:-$SCRIPT_DIR/unluac-hgcode}}"
 
-UV_HG=(uv run --python 3.13 --with 'mercurial<7' --with hg-git hg --config extensions.hggit=)
+UV_HG=(uv run --project "$SCRIPT_DIR" --python 3.13 hg --config extensions.hggit=)
 
 if [[ "$GIT_MIRROR_URL" == *"github.com"* && "$GIT_MIRROR_URL" == *":@"* ]]; then
   echo "error: GIT_MIRROR_URL appears to have empty credentials (missing token)." >&2

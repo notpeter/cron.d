@@ -6,6 +6,8 @@ This folder contains automation for mirroring the upstream Mercurial repo:
 
 ## Script
 
+Python dependencies for this automation are declared in `unluac/pyproject.toml` and consumed via `uv run --project unluac`.
+
 Run the sync manually:
 
 ```bash
