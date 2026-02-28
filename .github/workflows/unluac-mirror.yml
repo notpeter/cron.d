@@ -1,0 +1,27 @@
+name: unluac-mirror
+
+on:
+  pull_request:
+    paths:
+      - 'unluac/**'
+      - '.github/workflows/unluac-mirror.yml'
+  schedule:
+    - cron: '17 4 * * 1'
+  workflow_dispatch:
+
+jobs:
+  mirror:
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v6
+
+      - name: Update mirror
+        env:
+          UNLUAC_MIRROR_TOKEN: ${{ secrets.UNLUAC_MIRROR_TOKEN }}
+          GIT_MIRROR_URL: git+https://x-access-token:${{ secrets.UNLUAC_MIRROR_TOKEN }}@github.com/notpeter/unluac.git
+        run: ./unluac/sync-hg-git-mirror.sh
